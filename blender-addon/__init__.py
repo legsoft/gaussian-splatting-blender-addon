@@ -1055,7 +1055,7 @@ class ExportGaussianSplatting(bpy.types.Operator):
 
         N = len(mesh.vertices)
         
-        xyz = np.zeros((N, 3))
+        xyz = np.array([vert.co for vert in mesh.vertices])
         normals = np.zeros((N, 3))
         f_dc = np.zeros((N, 3))
         f_rest = np.zeros((N, 45))
@@ -1072,7 +1072,7 @@ class ExportGaussianSplatting(bpy.types.Operator):
         rot_quatw_attr = mesh.attributes.get("quatw")
 
         for i, _ in enumerate(mesh.vertices):
-            xyz[i] = position_attr.data[i].vector.to_tuple()
+            #xyz[i] = position_attr.data[i].vector.to_tuple()
             opacities[i] = log_opacity_attr.data[i].value
             scale[i] = logscale_attr.data[i].vector.to_tuple()
 
